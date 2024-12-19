@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -26,7 +25,7 @@ public class OptionPane extends JDialog implements ChangeListener, ActionListene
     private JPanel panel;
     private int preSpeed = 3;
     private int difficulty = 1;
-    private String gameSpeed = "Normal"; // Giá trị mặc định
+    private String gameSpeed = "Normal"; 
 
 
     public OptionPane(Application app) {   
