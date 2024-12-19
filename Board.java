@@ -58,10 +58,10 @@ public class Board extends JPanel implements ActionListener {
     }
 
     public void addGameSpeed(int newSpeed) {
-        this.propSpeed = newSpeed; //Update speed
+        this.propSpeed = newSpeed; // Update speed
         statusbar.setText("Game Speed: " + newSpeed + ". Restart to apply changes.");
         timer.stop();
-        timer = new Timer(1000 / propSpeed, this); // Khởi động lại Timer
+        timer = new Timer(1000 / propSpeed, this); // Reset Timer
     }
 
     public void actionPerformed(ActionEvent e) {
