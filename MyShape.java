@@ -1,6 +1,5 @@
 package Testapp1;
 
-
 import java.util.Random;
 import java.lang.Math;
 
