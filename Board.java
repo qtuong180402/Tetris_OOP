@@ -58,10 +58,10 @@ public class Board extends JPanel implements ActionListener {
     }
 
     public void addGameSpeed(int newSpeed) {
-        this.propSpeed = newSpeed; // Cập nhật tốc độ
+        this.propSpeed = newSpeed; // Update speed
         statusbar.setText("Game Speed: " + newSpeed + ". Restart to apply changes.");
         timer.stop();
-        timer = new Timer(1000 / propSpeed, this); // Khởi động lại Timer
+        timer = new Timer(1000 / propSpeed, this); // Reset Timer
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -127,7 +127,6 @@ public class Board extends JPanel implements ActionListener {
 
         updateHighScores(); // Update high scores with the current score
     }
-            // Save high scores to a file
     
     public void paintComponent(Graphics g) {
         Graphics2D g2D = (Graphics2D) g;
@@ -136,18 +135,17 @@ public class Board extends JPanel implements ActionListener {
         Dimension size = getSize();
         int boardTop = (int) size.getHeight() - BoardHeight * squareHeight();
 
-        g2D.setColor(Color.BLACK);  // Chọn màu cho lưới
+        g2D.setColor(Color.BLACK);  // Set color for the grid
         for (int x = 0; x < BoardWidth; x++) {
             for (int y = 0; y < BoardHeight; y++) {
-                // Vẽ các đường kẻ dọc
+                // Vertical
                 g2D.drawLine(x * squareWidth(), 0, x * squareWidth(), BoardHeight * squareHeight());
-                // Vẽ các đường kẻ ngang
+                // Horizontal
                 g2D.drawLine(0, y * squareHeight(), BoardWidth * squareWidth(), y * squareHeight());
             }
         }
 
-        
-
+        // Shape
         for (int i = 0; i < BoardHeight; ++i) {
             for (int j = 0; j < BoardWidth; ++j) {
                 MyShape.Tetrominoes shape = shapeAt(j, BoardHeight - i - 1);
@@ -206,7 +204,7 @@ public class Board extends JPanel implements ActionListener {
             newPiece();
         }
     }
-
+// New random next pieces 
     private void newPiece() {
         curPiece.setRandomShape(numOfShape);
         curX = BoardWidth / 2 + 1;
@@ -305,19 +303,22 @@ public class Board extends JPanel implements ActionListener {
                 x + squareWidth() - 1, y + 1);
     }
 
+    // Speed get to set with new timer
     public void setSpeed(int speed) {
         this.propSpeed = speed;
         timer.stop();
         timer = new Timer(1000 / speed, this);
-        timer.start();  // Đảm bảo Timer mới sẽ bắt đầu với tốc độ mới
+        timer.start();  
     }
-    
+
+    // Choose difficulty
     public void setDifficulty(int numOfShape) {
         this.numOfShape = numOfShape;
         statusbar.setText("You need to start game again...");
         timer.stop();
         timer = new Timer(1000 / propSpeed, this);
     }
+    
     // Check if the current score qualifies as a high score
     private void updateHighScores() {
     for (int i = 0; i < highScores.length; i++) {
@@ -327,11 +328,10 @@ public class Board extends JPanel implements ActionListener {
                 highScores[j] = highScores[j - 1];
             }
             highScores[i] = score; // Insert the new high score
-            
             break;
         }
-        
     }
+        
     // Update the high scores label
     StringBuilder highScoresText = new StringBuilder("<html>High Scores:<br>");
     for (int i = 0; i < highScores.length; i++) {
@@ -344,24 +344,18 @@ public class Board extends JPanel implements ActionListener {
     
 
     class TAdapter extends KeyAdapter {
-
         public void keyPressed(KeyEvent e) {
-
             if (!isStarted || curPiece.getShape() == MyShape.Tetrominoes.NoShape) {
                 return;
             }
-
             int keycode = e.getKeyCode();
-
             if (keycode == 'p' || keycode == 'P') {
                 pause();
                 return;
             }
-
             if (isPaused) {
                 return;
             }
-
             switch (keycode) {
                 case KeyEvent.VK_LEFT:
                     tryMove(curPiece, curX - 1, curY);
