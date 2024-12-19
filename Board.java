@@ -7,12 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.PrintWriter;
-
+import java.awt.event.KeyEvent; 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -120,19 +115,6 @@ public class Board extends JPanel implements ActionListener {
             statusbar.setText(String.valueOf(numLinesRemoved));
         }
         repaint();
-    }
-    // Load high scores from a file
-    public void loadHighScores() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("highscores.txt"))) {
-            for (int i = 0; i < highScores.length; i++) {
-                String line = reader.readLine();
-                if (line != null) {
-                    highScores[i] = Integer.parseInt(line);
-                }
-            }
-        } catch (IOException e) {
-            System.err.println("Error loading high scores: " + e.getMessage());
-        }
     }
 
     public void stop() {
@@ -358,7 +340,7 @@ public class Board extends JPanel implements ActionListener {
     highScoresText.append("</html>");
     highScoresLabel.setText(highScoresText.toString());
     myApp.tetris.statuspane.highScored(highScores);
-}
+    }
     
 
     class TAdapter extends KeyAdapter {
