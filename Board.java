@@ -19,7 +19,7 @@ public class Board extends JPanel implements ActionListener {
     final int BoardHeight = 24;
 
     Timer timer;
-    int[] highScores = {0, 0, 0}; // Store top 3 high scores
+    int[] highestScores = {0}; 
     boolean isFallingFinished = false;
     boolean isStarted = false;
     boolean isPaused = false;
@@ -46,22 +46,22 @@ public class Board extends JPanel implements ActionListener {
 
         statusbar = parent.getStatusBar();
         highScoresLabel = new JLabel(); 
-        highScoresLabel.setText("High Scores:\n 1: 0\n 2: 0\n 3: 0"); 
+        highScoresLabel.setText("High Scores: 0"); 
         parent.add(highScoresLabel);
         board = new MyShape.Tetrominoes[BoardWidth * BoardHeight];
         addKeyListener(new TAdapter());
         clearBoard();
         System.out.println("Update High Score: ");
-        for (int score : highScores) {
+        for (int score : highestScores) {
             System.out.println(score);
         }
     }
 
     public void addGameSpeed(int newSpeed) {
-        this.propSpeed = newSpeed; // Update speed
+        this.propSpeed = newSpeed; // Cập nhật tốc độ
         statusbar.setText("Game Speed: " + newSpeed + ". Restart to apply changes.");
         timer.stop();
-        timer = new Timer(1000 / propSpeed, this); // Reset Timer
+        timer = new Timer(1000 / propSpeed, this); // Khởi động lại Timer
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -320,13 +320,13 @@ public class Board extends JPanel implements ActionListener {
     }
     // Check if the current score qualifies as a high score
     private void updateHighScores() {
-    for (int i = 0; i < highScores.length; i++) {
-        if (score > highScores[i]) {
+    for (int i = 0; i < highestScores.length; i++) {
+        if (score > highestScores[i]) {
             // Shift lower scores down
-            for (int j = highScores.length - 1; j > i; j--) {
-                highScores[j] = highScores[j - 1];
+            for (int j = highestScores.length - 1; j > i; j--) {
+                highestScores[j] = highestScores[j - 1];
             }
-            highScores[i] = score; // Insert the new high score
+            highestScores[i] = score; // Insert the new high score
             
             break;
         }
@@ -334,12 +334,12 @@ public class Board extends JPanel implements ActionListener {
     }
     // Update the high scores label
     StringBuilder highScoresText = new StringBuilder("<html>High Scores:<br>");
-    for (int i = 0; i < highScores.length; i++) {
-        highScoresText.append((i + 1) + ": " + highScores[i] + "<br>");
+    for (int i = 0; i < highestScores.length; i++) {
+        highScoresText.append((i + 1) + ": " + highestScores[i] + "<br>");
     }
     highScoresText.append("</html>");
     highScoresLabel.setText(highScoresText.toString());
-    myApp.tetris.statuspane.highScored(highScores);
+    myApp.tetris.statuspane.highScored(highestScores);
     }
     
 
