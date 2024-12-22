@@ -1,4 +1,6 @@
 # Tetris_OOP
+This report presents our final project for the OOP course: a Tetris game. The project demonstrates key OOP principles like encapsulation, inheritance, and polymorphism. It includes features such as dynamic block generation, collision detection, and a scoring system, showcasing how OOP is used to build engaging and maintainable software.
+
 1.1	About our group:
 DNAT group is an Object-Oriented Programming project group. We have 4 members, including:
 Full name - GitHub username
