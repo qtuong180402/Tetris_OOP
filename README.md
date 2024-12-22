@@ -4,15 +4,15 @@ This report presents our final project for the OOP course: a Tetris game. The pr
 1.1	About our group:
 DNAT group is an Object-Oriented Programming project group. We have 4 members, including:
 Full name - GitHub username
-Student ID
+Student ID - Contribution
 Lê Võ Hồng Na - HonggNa
-ITITSB23007
+ITITSB23007 - 100% (OptionPane.java + Application.java + UML model + Report + Presentation slide)
 Nguyễn Nhật Anh - IcyKewtiie
-ITITSB23006
+ITITSB23006 - 100% (Board.java + Tetris.java + UML model + gathering all files and pushing to github)
 Phạm Quang Tường - qtuong180402
-ITDSIU20108
+ITDSIU20108 - 100% (MyShape.java + UML model + Report)
 Nguyễn Nhật Duy
-ITITWE22143
+ITITWE22143 - 100% (StatusPane.java + UML model + Report)
 
 1.2	About the game project: 
 Tetris is one of the most iconic and enduring puzzle games in video game history. Created by Alexey Pajitnov in 1984, the game challenges players to manipulate falling geometric shapes, known as Tetrominoes, to form complete horizontal lines on a game board. When a line is successfully formed, it disappears, and the player earns points. As the game progresses, the falling blocks increase in speed, adding to the difficulty and excitement.
