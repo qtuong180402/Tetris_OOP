@@ -55,11 +55,11 @@ public class Tetris extends JFrame {
 
 		sidePanel.add(statuspane, BorderLayout.NORTH);
 	
-    // Thêm các thành phần vào JFrame
+    // Add components into JFrame
     this.setLayout(new BorderLayout());
-    this.add(sidePanel, BorderLayout.EAST);   // Panel chứa StatusPane + HighScores bên phải
-    this.add(board, BorderLayout.CENTER);     // Bảng trò chơi ở giữa
-		this.add(statusbar, BorderLayout.SOUTH);  // Thanh trạng thái bên dưới
+    this.add(sidePanel, BorderLayout.EAST);   // Panel containing StatusPane + HighScores at the right side
+    this.add(board, BorderLayout.CENTER);     // Board Game at the center
+		this.add(statusbar, BorderLayout.SOUTH);  // Status bar at the bottom
 		
 	}
 
