@@ -1,79 +1,90 @@
 package Testapp1;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
+import java.awt.event.KeyEvent;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+public class Tetris extends JFrame {
 
-public class StatusPane extends JPanel implements ActionListener{
-	Application myApp;
-	OptionPane option;
-	JLabel score, highestScores, count;
-	public StatusPane(Application app)
-	{
-		myApp = app;
-		setPreferredSize(new Dimension(120, 625));
-		setBorder(BorderFactory.createEtchedBorder(Color.red, Color.blue));
-		initializeComponents();
-	}
-	private void initializeComponents() {
-		setLayout(new GridLayout( 10, 1));
+    JLabel statusbar;
+    Board board;
+    Application myApp;
+    StatusPane statuspane;
+    public Tetris(Application app) {
+    	myApp = app;
+        setSize(500, 700);
+        setTitle("Tetris");
+        setResizable(false);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        initializeComponents();
+        setVisible(true);
+   }
+
+   private void initializeComponents() {
+		JMenuBar menubar = new JMenuBar();
+		JMenu menu;
+		JMenuItem menuitem;
 		
-		option = new OptionPane(myApp);
-		JButton butStart = new JButton("Start Game");
-		butStart.setPreferredSize(new Dimension(100, 40));
-		butStart.addActionListener(this);
-		this.add(butStart);
-		JButton butOption = new JButton("Setting");
-		butOption.setPreferredSize(new Dimension(100, 40));
-		butOption.addActionListener(this);
-		this.add(butOption);
-		score = new JLabel("Score: 0");
-		this.add(score);
+		this.setJMenuBar(menubar);
+		menu = new JMenu("Game");
+		menu.setMnemonic(KeyEvent.VK_G);
+		menuitem = new JMenuItem("New Game");
+		menuitem.setMnemonic(KeyEvent.VK_N);
+		menuitem.addActionListener(new MenuHandler(this));
+		menu.add(menuitem);
+		menu.addSeparator();
+		menuitem = new JMenuItem("Exit");
+		menuitem.setMnemonic(KeyEvent.VK_X);
+		menuitem.addActionListener(new MenuHandler(this));
+		menu.add(menuitem);
+		menubar.add(menu);
+		
+		statuspane = new StatusPane(myApp);
+		statusbar = new JLabel("Choose New Game from the menu Game to start game.");
+		board = new Board(myApp, this);
 
+		JPanel sidePanel = new JPanel();
+    sidePanel.setLayout(new BorderLayout());
 
-		highestScores = new JLabel("High Scores: ");
-		this.add(highestScores);
-
-		count = new JLabel("Lines: ");
-		this.add(count);
-	}
+		sidePanel.add(statuspane, BorderLayout.NORTH);
 	
-	public void scored(int score)
-	{
-		this.score.setText("Score: "  +   Integer.toString(score));
+    // Thêm các thành phần vào JFrame
+    this.setLayout(new BorderLayout());
+    this.add(sidePanel, BorderLayout.EAST);   // Panel chứa StatusPane + HighScores bên phải
+    this.add(board, BorderLayout.CENTER);     // Bảng trò chơi ở giữa
+		this.add(statusbar, BorderLayout.SOUTH);  // Thanh trạng thái bên dưới
+		
 	}
 
-	public void highScored(int[] highScores) {
-    StringBuilder scores = new StringBuilder("<html>High Scores:<br>");
-    for (int i = 0; i < highScores.length; i++) {
-        scores.append( highScores[i]);
-    }
-    scores.append("</html>");
-    this.highestScores.setText(scores.toString());
-	}
-
-	public void Counted(int count){
-		this.count.setText("Line: "  +   Integer.toString(count));
-	}
-
+   public JLabel getStatusBar() {
+       return statusbar;
+   }
+   
+   public class MenuHandler implements ActionListener
+   {
+	   Tetris ter;
+	   public MenuHandler(Tetris ter)
+	   {
+		   this.ter = ter;
+	   }
+	   public void actionPerformed(ActionEvent e) {
+		   String s = e.getActionCommand();
+		   if(s == "New Game")
+		   {
+			   board.start();
+		   }
+		   else if(s == "Exit")
+		   {
+			   ter.dispose();
+		   }
+	   }
+   }
 	
-	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand() == "Start Game"){
-			myApp.tetris.board.start();
-		}
-		else
-		{
-			myApp.tetris.board.stop();
-			option.setVisible(true);
-		}
-	}
 }
-
-
