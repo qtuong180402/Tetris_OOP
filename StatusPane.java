@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 public class StatusPane extends JPanel implements ActionListener{
 	Application myApp;
 	OptionPane option;
-	JLabel score, highScores, count;
+	JLabel score, highestScores, count;
 	public StatusPane(Application app)
 	{
 		myApp = app;
@@ -38,8 +38,8 @@ public class StatusPane extends JPanel implements ActionListener{
 		this.add(score);
 
 
-		highScores = new JLabel("High Scores: ");
-		this.add(highScores);
+		highestScores = new JLabel("High Scores: ");
+		this.add(highestScores);
 
 		count = new JLabel("Lines: ");
 		this.add(count);
@@ -53,10 +53,10 @@ public class StatusPane extends JPanel implements ActionListener{
 	public void highScored(int[] highScores) {
     StringBuilder scores = new StringBuilder("<html>High Scores:<br>");
     for (int i = 0; i < highScores.length; i++) {
-        scores.append((i + 1) + ": " + highScores[i] + "<br>");
+        scores.append( highScores[i]);
     }
     scores.append("</html>");
-    this.highScores.setText(scores.toString());
+    this.highestScores.setText(scores.toString());
 	}
 
 	public void Counted(int count){
